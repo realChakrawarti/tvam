@@ -1,4 +1,5 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import logo from 'assets/logo.png'
 
 import '@/renderer/styles/global.css';
 
@@ -17,6 +18,7 @@ import {
 function Hello() {
   return (
     <div className="w-full h-full bg-yellow-400">
+      <img src={logo} />
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
