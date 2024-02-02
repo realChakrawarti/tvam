@@ -1,9 +1,8 @@
 import path from 'path';
-import fs from 'fs';
 import { app, BrowserWindow } from 'electron';
 import { resolveHtmlPath, verifyDb } from './util';
 import registerServices from './service';
-import { DatabaseHelper } from './models/databaseHelper';
+import { DatabaseHelper } from './model/databaseHelper';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -52,6 +51,10 @@ const createWindow = async () => {
 
         if (isDebug) {
             mainWindow.webContents.openDevTools();
+        }
+
+        if (app.isPackaged) {
+            mainWindow.removeMenu();
         }
 
         if (process.env.START_MINIMIZED) {
