@@ -11,6 +11,8 @@
 
 -   Fonts: https://fonts.google.com/selection?query=Tiro+Typeworks
 
+-   React Design Patterns: https://www.toptal.com/react/react-design-patterns-and-best-practices
+
 # Make use of:
 
 -   When writing SQL hard, make use of KnexJs https://knexjs.org/. Its a query builder.
@@ -18,15 +20,17 @@
 # Projects Reference:
 
 -   https://github.dev/SteveCastle/loki/
-- i18n: https://github.com/xiaolai/everyone-can-use-english
-- https://github.com/lyswhut/lx-music-desktop
+-   i18n: https://github.com/xiaolai/everyone-can-use-english
+-   https://github.com/lyswhut/lx-music-desktop
 
 # Pitfalls
 
 ## Usage of alias in `main.ts`
+
 https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/2737#issuecomment-1430101495
 
 ## SQLite binary issue
+
 On trying to the package we application, we got the following error,
 
 ```
@@ -73,3 +77,50 @@ npm i sqlite3 --build-from-source --runtime=electron --target=<electron_version>
 which is documented at the bottom of `README.md` file on the sqlite3 repository.
 
 Update: The above process i.e; installing from command didn't work. Downgrading to v5.1.6 solved the issue, https://github.com/TryGhost/node-sqlite3/issues/1748
+
+# Project Structure
+
+## `root` Directory
+
+```
+├───.erb // Electron react boilerplate webpack configuration and scripts
+│
+├───.vscode // VSCode IDE configuration
+│
+├───assets // Static images and fonts
+│
+├───release
+│   │   
+│   └───app // Include platform specific library binary
+│
+├───src // Source code of the entire application
+```
+
+## `main` Directory
+
+```
+│   main.ts // Entry file for main process
+│   preload.ts // Setup exposing ipcRenderer to the renderer process
+│   util.ts // Utility functions
+|
+├───controller // Excute queries on the database
+│
+├───models // Contains initialization of database and its tables
+│
+└───service // Handles ipcRenderer events on ipcMain and registers the corresponding listener
+```
+
+## `renderer` Directory
+
+```
+│   App.tsx // Entry file for react application
+│   index.ejs // HTML main template
+│   index.tsx // Entry file for renderer process
+│   preload.d.ts // Type definition of ipcRenderer
+│
+├───element // Re-usable elements to be used in view
+├───styles //
+│       global.css // Tailwind and Shadcn styles configuration
+│
+└───view // Views in the application
+```
