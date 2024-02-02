@@ -1,8 +1,8 @@
 import { IpcMainInvokeEvent } from 'electron/main';
-import { QUERY } from '../models/sqlQuery';
+import { QUERY } from '../model/sqlQuery';
 import { generateId } from '../util';
 import { dbLog } from '@/lib/logger';
-import { DatabaseHelper } from '../models/databaseHelper';
+import { DatabaseHelper } from '../model/databaseHelper';
 import { handleCatchError } from '@/lib/utils';
 import { SQLiteResponse } from './types';
 import HttpStatusCode from './httpStatusCode';

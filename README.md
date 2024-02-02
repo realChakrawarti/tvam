@@ -13,9 +13,16 @@
 
 -   React Design Patterns: https://www.toptal.com/react/react-design-patterns-and-best-practices
 
+# Colors
+
+-   bg: #070110
+-   fg: #328780
+
 # Make use of:
 
--   When writing SQL hard, make use of KnexJs https://knexjs.org/. Its a query builder.
+-   When writing SQL becomes hard, use KnexJs https://knexjs.org/. Its a query builder.
+-   Zod for client side validation, https://zod.dev/
+-   Framer Motion for animation, https://www.framer.com/motion/introduction/##installation
 
 # Projects Reference:
 
@@ -90,7 +97,7 @@ Update: The above process i.e; installing from command didn't work. Downgrading 
 ├───assets // Static images and fonts
 │
 ├───release
-│   │   
+│   │
 │   └───app // Include platform specific library binary
 │
 ├───src // Source code of the entire application
