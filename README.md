@@ -1,34 +1,99 @@
 # त्वम्: Tvam
 
+# Project Setup for contribution
+
+Clone the repository
+
+Checkout to `develop` branch
+
+## Install dependencies
+
+To install the packages do `npm install`
+
+cd to `release/app` and do `npm install`, this symlinks `node_modules` to `src` directory
+
+## Start and build the application
+
+To the start the project in development mode, `npm start`
+
+To package the application for windows, that creates an executable `npm run package`
+
+# Project Structure
+
+## `root` Directory
+
+```
+├───.erb // Electron react boilerplate webpack configuration and scripts
+│
+├───.vscode // VSCode IDE configuration
+│
+├───assets // Static images and fonts
+│
+├───release
+│   │
+│   └───app // Include platform specific library binary
+│
+├───src // Source code of the entire application
+```
+
+## `main` Directory
+
+```
+│   main.ts // Entry file for main process
+│   preload.ts // Setup exposing ipcRenderer to the renderer process
+│   util.ts // Utility functions
+|
+├───controller // Excute queries on the database
+│
+├───models // Contains initialization of database and its tables
+│
+└───service // Handles ipcRenderer events on ipcMain and registers the corresponding listener
+```
+
+## `renderer` Directory
+
+```
+│   App.tsx // Entry file for react application
+│   index.ejs // HTML main template
+│   index.tsx // Entry file for renderer process
+│   preload.d.ts // Type definition of ipcRenderer
+│
+├───element // Re-usable elements to be used in view
+├───styles //
+│       global.css // Tailwind and Shadcn styles configuration
+│
+└───view // Views in the application
+```
+
+
 # References:
 
--   SQLite ERB: https://github.com/amilajack/erb-sqlite-example
--   Node SQLite3 API: https://github.com/TryGhost/node-sqlite3/wiki/API
--   SQLite Official Docs: https://www.sqlite.org/docs.html
--   How to use sqlite sequalize inside boilerplate: https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/3083
+- SQLite ERB: https://github.com/amilajack/erb-sqlite-example
+- How to use sqlite sequalize inside boilerplate: https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/3083
+- React Design Patterns: https://www.toptal.com/react/react-design-patterns-and-best-practices
 
--   How does SQLite works: https://jvns.ca/blog/2014/09/27/how-does-sqlite-work-part-1-pages/ and https://jvns.ca/blog/2014/10/02/how-does-sqlite-work-part-2-btrees/
 
--   Fonts: https://fonts.google.com/selection?query=Tiro+Typeworks
-
--   React Design Patterns: https://www.toptal.com/react/react-design-patterns-and-best-practices
+| Description                                  | Link                                                                                                                                              |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DataType and conversion with other Databases | https://www.sqlite.org/datatype3.html#affinity_name_examples                                                                                      |
+| SQLite Official Docs                         | https://www.sqlite.org/docs.html                                                                                                                  |
+| How does SQLite works                        | https://jvns.ca/blog/2014/09/27/how-does-sqlite-work-part-1-pages/<br /><br />https://jvns.ca/blog/2014/10/02/how-does-sqlite-work-part-2-btrees/ |
+| Node SQLite3 API                             | https://github.com/TryGhost/node-sqlite3/wiki/API                                                                                                 |
+| Framer Motion for animation                  | https://www.framer.com/motion/introduction/##installation                                                                                         |
+| Zod for client side validation               | https://zod.dev/                                                                                                                                  |
+| Knex, SQL query builder                      | https://knexjs.org                                                                                                                                |
+|                                              |                                                                                                                                                   |
 
 # Colors
 
--   bg: #070110
--   fg: #328780
-
-# Make use of:
-
--   When writing SQL becomes hard, use KnexJs https://knexjs.org/. Its a query builder.
--   Zod for client side validation, https://zod.dev/
--   Framer Motion for animation, https://www.framer.com/motion/introduction/##installation
+- bg: #070110
+- fg: #328780
 
 # Projects Reference:
 
--   https://github.dev/SteveCastle/loki/
--   i18n: https://github.com/xiaolai/everyone-can-use-english
--   https://github.com/lyswhut/lx-music-desktop
+- https://github.dev/SteveCastle/loki/
+- i18n: https://github.com/xiaolai/everyone-can-use-english
+- https://github.com/lyswhut/lx-music-desktop
 
 # Pitfalls
 
@@ -84,50 +149,3 @@ npm i sqlite3 --build-from-source --runtime=electron --target=<electron_version>
 which is documented at the bottom of `README.md` file on the sqlite3 repository.
 
 Update: The above process i.e; installing from command didn't work. Downgrading to v5.1.6 solved the issue, https://github.com/TryGhost/node-sqlite3/issues/1748
-
-# Project Structure
-
-## `root` Directory
-
-```
-├───.erb // Electron react boilerplate webpack configuration and scripts
-│
-├───.vscode // VSCode IDE configuration
-│
-├───assets // Static images and fonts
-│
-├───release
-│   │
-│   └───app // Include platform specific library binary
-│
-├───src // Source code of the entire application
-```
-
-## `main` Directory
-
-```
-│   main.ts // Entry file for main process
-│   preload.ts // Setup exposing ipcRenderer to the renderer process
-│   util.ts // Utility functions
-|
-├───controller // Excute queries on the database
-│
-├───models // Contains initialization of database and its tables
-│
-└───service // Handles ipcRenderer events on ipcMain and registers the corresponding listener
-```
-
-## `renderer` Directory
-
-```
-│   App.tsx // Entry file for react application
-│   index.ejs // HTML main template
-│   index.tsx // Entry file for renderer process
-│   preload.d.ts // Type definition of ipcRenderer
-│
-├───element // Re-usable elements to be used in view
-├───styles //
-│       global.css // Tailwind and Shadcn styles configuration
-│
-└───view // Views in the application
-```
