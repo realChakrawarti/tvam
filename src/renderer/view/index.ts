@@ -1,3 +1,5 @@
-import { Login } from './login';
+import LoginPage from './login';
+import SignupPage from './signup';
+import SplashPage from './splash';
 
-export { Login };
+export { SignupPage, LoginPage, SplashPage };

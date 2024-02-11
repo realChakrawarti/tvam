@@ -1,13 +1,6 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import '@/renderer/styles/global.css';
-import { Login } from './view';
+import AppRouter from './router';
 
 export default function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login />} />
-            </Routes>
-        </Router>
-    );
+    return <AppRouter />;
 }

@@ -65,7 +65,6 @@ To package the application for windows, that creates an executable `npm run pack
 └───view // Views in the application
 ```
 
-
 # References:
 
 - SQLite ERB: https://github.com/amilajack/erb-sqlite-example
@@ -82,7 +81,8 @@ To package the application for windows, that creates an executable `npm run pack
 | Framer Motion for animation                  | https://www.framer.com/motion/introduction/##installation                                                                                         |
 | Zod for client side validation               | https://zod.dev/                                                                                                                                  |
 | Knex, SQL query builder                      | https://knexjs.org                                                                                                                                |
-|                                              |                                                                                                                                                   |
+| SQLite Forum                                 | https://sqlite.org/forum/                                                                                                                         |
+| React Hook Form Tutorial (30 mins)           | https://www.youtube.com/watch?v=cc_xmawJ8Kg                                                                                                       |
 
 # Colors
 
