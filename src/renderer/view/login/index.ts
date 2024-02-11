@@ -1,1 +1,3 @@
-export * from './Login';
+import LoginPage from './loginPage';
+
+export default LoginPage;
