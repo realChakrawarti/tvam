@@ -1,6 +1,6 @@
-import HttpStatusCode from './httpStatusCode';
+import type HttpStatusCode from './httpStatusCode';
 
-export type SQLiteResponse<T = void> = {
+export type SQLiteResponse<T = unknown> = {
     status: HttpStatusCode;
     message: string;
     data: T;

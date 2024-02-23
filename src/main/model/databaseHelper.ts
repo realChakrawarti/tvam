@@ -1,6 +1,6 @@
 import { dbLog } from '@/lib/logger';
 import * as sqlite from 'sqlite3';
-import { TABLE_QUERIES } from './sqlQuery';
+import TABLE_QUERIES from './tableInitializationQueries';
 
 const sqlite3 = sqlite.verbose();
 

@@ -1,7 +1,7 @@
-import { userServices } from './user.service';
+import userService from './user.service';
 
 function registerServices() {
-    userServices();
+    userService();
 }
 
 export default registerServices;
