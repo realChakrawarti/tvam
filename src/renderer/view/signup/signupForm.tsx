@@ -9,34 +9,17 @@ import {
 } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
-import HttpStatusCode from '@/main/controller/httpStatusCode';
+// import HttpStatusCode from '@/main/controller/httpStatusCode';
 import { Channel } from '@/common/channel';
 import { useForm } from 'react-hook-form';
+import DbApi from '@/renderer/utils/api';
 
 export default function SignupForm() {
     const form = useForm();
 
     const onSubmit = async (data: any) => {
-        const response = await window.electron.ipcRenderer.invoke(
-            Channel.CREATE_USER,
-            {
-                name: data.name,
-                passcode: data.passcode,
-            }
-        );
-
-        if (response.status === HttpStatusCode.CREATED) {
-            console.log({
-                title: 'Account created successfully!',
-            });
-        } else {
-            console.log({
-                title: 'Uh oh! Something went wrong.',
-                description: response.message,
-            });
-        }
-
-        console.log('response', response);
+        const response = await DbApi.create(Channel.CREATE_USER, data);
+        console.log('>>>response in signupForm', response);
     };
 
     return (

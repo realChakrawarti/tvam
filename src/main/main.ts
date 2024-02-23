@@ -1,20 +1,20 @@
 import path from 'path';
 import { app, BrowserWindow } from 'electron';
+import sourceMapSupport from 'source-map-support';
 import { resolveHtmlPath, verifyDb } from './util';
 import registerServices from './service';
 import { DatabaseHelper } from './model/databaseHelper';
 
 let mainWindow: BrowserWindow | null = null;
 
-const databasePath =
+const sqliteDbPath =
     process.env.NODE_ENV !== 'production'
         ? path.join(__dirname, '../../database/tvam.sqlite')
         : path.join(process.resourcesPath, 'database', 'tvam.sqlite');
 
-verifyDb(databasePath);
+verifyDb(sqliteDbPath);
 
 if (process.env.NODE_ENV === 'production') {
-    const sourceMapSupport = require('source-map-support');
     sourceMapSupport.install();
 }
 
@@ -78,7 +78,7 @@ app.on('window-all-closed', () => {
 
 app.whenReady()
     .then(async () => {
-        await DatabaseHelper.initDb(databasePath);
+        await DatabaseHelper.initDb(sqliteDbPath);
     })
     .then(() => {
         registerServices();

@@ -19,23 +19,24 @@ export function generateId(size = 16, prefix = ''): string {
     const nanoid = customAlphabet(alphabet, size);
     if (prefix) {
         return `${prefix}_${nanoid()}`;
-    } else return nanoid();
+    }
+    return nanoid();
 }
 
-export function verifyDb(path: string) {
+export function verifyDb(dbPath: string) {
     // Check if the directory exists, create it if not
 
-    const dbDirectory = dirname(path);
+    const dbDirectory = dirname(dbPath);
 
     if (!fs.existsSync(dbDirectory)) {
         fs.mkdirSync(dbDirectory, { recursive: true });
     }
 
     // Check if the file exists, create it if not
-    if (!fs.existsSync(path)) {
+    if (!fs.existsSync(dbPath)) {
         // You can perform additional tasks here, like initializing the database
         // For now, let's just create an empty file
-        fs.writeFileSync(path, '');
+        fs.writeFileSync(dbPath, '');
     } else {
         console.log('File already exists');
     }

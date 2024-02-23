@@ -1,10 +1,6 @@
-export const QUERY = {
-    INSERT_USER: `INSERT INTO user(id, name, passcode, image) VALUES(?,?,?,?)`,
-};
-
 // Table Queries
 
-export const TABLE_QUERIES = [
+const TABLE_QUERIES = [
     {
         name: 'User',
         sql: `CREATE TABLE IF NOT EXISTS 
@@ -27,3 +23,5 @@ export const TABLE_QUERIES = [
         )`,
     },
 ];
+
+export default TABLE_QUERIES;

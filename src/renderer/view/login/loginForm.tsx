@@ -12,6 +12,8 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Link } from 'react-router-dom';
+import { ROUTE } from '@/renderer/types';
 
 const formSchema = z.object({
     passcode: z
@@ -57,6 +59,10 @@ export default function LoginForm() {
                     )}
                 />
                 <Button type="submit">Submit</Button>
+                <p>
+                    Create a new account:
+                    <Link to={ROUTE.SIGNUP}>register</Link>
+                </p>
             </form>
         </Form>
     );

@@ -1,9 +1,15 @@
+import { cn } from '@/lib/utils';
 import logo from 'assets/logo.png';
 import { motion } from 'framer-motion';
 
-export default function SideSplash() {
+export default function SideSplash({ className }: { className?: string }) {
     return (
-        <div className="h-full flex flex-col items-center justify-center bg-[#070110] gap-4">
+        <div
+            className={cn(
+                'h-full flex flex-col items-center justify-center bg-[#070110] gap-4',
+                className
+            )}
+        >
             <motion.img
                 animate={{ rotate: 360 }}
                 transition={{

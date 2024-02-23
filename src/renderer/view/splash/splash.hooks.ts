@@ -2,25 +2,25 @@ import type { RoutePath } from '@/renderer/types';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface PageTransitionProps {
+interface PageTimeoutProps {
     path: RoutePath;
-    timeoutInSecond: number;
+    timeoutInSeconds: number;
     callback?: () => void | undefined;
 }
 
-export default function usePageTransition({
+export default function usePageTimeout({
     path,
-    timeoutInSecond,
-}: PageTransitionProps) {
+    timeoutInSeconds,
+}: PageTimeoutProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             navigate(path);
-        }, timeoutInSecond);
+        }, timeoutInSeconds * 1000);
 
         return () => {
             clearTimeout(timeoutId);
         };
-    }, [navigate, path, timeoutInSecond]);
+    }, [navigate, path, timeoutInSeconds]);
 }

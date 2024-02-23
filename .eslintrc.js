@@ -15,6 +15,9 @@ module.exports = {
         '@typescript-eslint/no-shadow': 'error',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'error',
+        'react/prop-types': 'off', // Since we do not use prop-types
+        'react/require-default-props': 'off', // Since we do not use prop-types
+        'promise/always-return': 'off',
         'sort-imports': [
             'error',
             {
