@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import logo from 'assets/logo.png';
 import { Progress } from '@/components/ui/progress';
 import { useEffect, useState } from 'react';
-import DbApi from '@/renderer/utils/api';
-import { Channel } from '@/common/channel';
+import {
+    useGetLocalStorage,
+    useSetLocalStorageUsers,
+} from '@/renderer/utils/hooks';
 import usePageTimeout from './splash.hooks';
 
 const tasks = [
@@ -18,15 +20,18 @@ export default function SplashPage() {
         message: '',
         value: 0,
     });
+
+    const users = useGetLocalStorage('allUsers');
+    const path = users?.length ? ROUTE.LOGIN : ROUTE.SIGNUP;
+
     usePageTimeout({
-        path: ROUTE.LOGIN,
+        path,
         timeoutInSeconds: 6,
     });
 
-    useEffect(() => {
-        const response = DbApi.read(Channel.GET_ALL_USERS);
-        console.log('Users', response);
+    useSetLocalStorageUsers();
 
+    useEffect(() => {
         let index = 0;
 
         const intervalId = setInterval(() => {

@@ -7,7 +7,7 @@ export default function SignupPage() {
             <div className="w-1/2 h-full">
                 <SideSplash />
             </div>
-            <div className="w-1/2 h-full flex flex-col p-6 justify-center">
+            <div className="w-1/2 h-full flex flex-col p-6 justify-center bg-[var(--tvam-bg-2)]">
                 <SignupForm />
             </div>
         </div>
