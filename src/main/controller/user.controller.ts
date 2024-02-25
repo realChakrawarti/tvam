@@ -1,15 +1,16 @@
 import type { IpcMainInvokeEvent } from 'electron/main';
 import { handleCatchError } from '@/lib/utils';
 import { dbLog } from '@/lib/logger';
+import type { SQLiteResponse } from '@/common/types';
 import { generateId } from '../util';
 import { DatabaseHelper } from '../model/databaseHelper';
-import type { SQLiteResponse } from './types';
-import HttpStatusCode from './httpStatusCode';
+import HttpStatusCode from '../../common/httpStatusCode';
 
 const QUERY = {
     INSERT_USER: `INSERT INTO user(id, name, passcode, image) VALUES(?,?,?,?)`,
     GET_USERS: `SELECT name, id FROM user`,
     GET_USER_BY_NAME: `SELECT * FROM user WHERE name = ?`,
+    GET_USER_BY_ID: `SELECT * FROM user WHERE id = ?`,
 };
 
 export async function createUser(_: IpcMainInvokeEvent, data: any) {
@@ -18,10 +19,8 @@ export async function createUser(_: IpcMainInvokeEvent, data: any) {
     const runQuery = () => {
         return new Promise<Partial<SQLiteResponse>>((resolve, reject) => {
             db.serialize(() => {
-                let userExists;
                 db.get(QUERY.GET_USER_BY_NAME, [name], (err, row) => {
                     if (err || row) {
-                        userExists = true;
                         if (row) {
                             return reject(
                                 new Error(
@@ -31,23 +30,25 @@ export async function createUser(_: IpcMainInvokeEvent, data: any) {
                         }
                         return reject(err);
                     }
-                    userExists = false;
-                    return undefined;
-                });
-                if (!userExists) {
+                    const userId = generateId(8, 'user');
                     db.run(
                         QUERY.INSERT_USER,
-                        [generateId(8, 'user'), name, passcode],
-                        (err) => {
+                        [userId, name, passcode],
+                        (userGenError) => {
                             if (err) {
-                                return reject(err);
+                                return reject(userGenError);
                             }
                             return resolve({
                                 message: 'User created successfully!',
+                                data: {
+                                    userId,
+                                    name,
+                                },
                             });
                         }
                     );
-                }
+                    return undefined;
+                });
             });
         });
     };
@@ -66,7 +67,7 @@ export async function createUser(_: IpcMainInvokeEvent, data: any) {
     } catch (err) {
         const message = handleCatchError(err);
         response = {
-            status: 400,
+            status: HttpStatusCode.FORBIDDEN,
             message: `Unable to create user: ${message}`,
         };
     }
@@ -105,8 +106,54 @@ export async function getUsers() {
     } catch (err) {
         const message = handleCatchError(err);
         response = {
-            status: 400,
+            status: HttpStatusCode.NOT_FOUND,
             message: `Unable to retrieve users: ${message}`,
+        };
+    }
+
+    dbLog.info(response);
+    return response;
+}
+
+export async function loginUser(_: IpcMainInvokeEvent, data: any) {
+    const db = DatabaseHelper.getDb();
+    const { userId, passcode } = data;
+    const runQuery = () => {
+        return new Promise<Partial<SQLiteResponse>>((resolve, reject) => {
+            db.get(QUERY.GET_USER_BY_ID, [userId], (err, row: any) => {
+                if (err) {
+                    reject(err);
+                }
+                if (row?.passcode === passcode) {
+                    resolve({
+                        message: 'User authenticated successfully!',
+                        data: {
+                            userId: row.id,
+                            name: row.name,
+                        },
+                    });
+                }
+                reject(new Error("User doesn't exists!"));
+            });
+        });
+    };
+    let response;
+    try {
+        await runQuery()
+            .then((result) => {
+                response = {
+                    status: HttpStatusCode.OK,
+                    ...result,
+                };
+            })
+            .catch((err) => {
+                throw new Error(err.message);
+            });
+    } catch (err) {
+        const message = handleCatchError(err);
+        response = {
+            status: HttpStatusCode.NOT_FOUND,
+            message: `${message}`,
         };
     }
 

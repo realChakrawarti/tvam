@@ -83,11 +83,13 @@ To package the application for windows, that creates an executable `npm run pack
 | Knex, SQL query builder                      | https://knexjs.org                                                                                                                                |
 | SQLite Forum                                 | https://sqlite.org/forum/                                                                                                                         |
 | React Hook Form Tutorial (30 mins)           | https://www.youtube.com/watch?v=cc_xmawJ8Kg                                                                                                       |
+| Sidebar                                      | https://www.youtube.com/watch?v=NFrFhBJPTmI                                                                                                       |
 
 # Colors
 
 - bg: #070110
 - fg: #328780
+- space: #e0e7ff
 
 # Projects Reference:
 
