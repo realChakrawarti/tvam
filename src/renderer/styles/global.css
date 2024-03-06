@@ -38,6 +38,9 @@
         --ring: 215 20.2% 65.1%;
 
         --radius: 0.5rem;
+
+        --tvam-bg-1: #070110;
+        --tvam-bg-2: #e0e7ff;
     }
 
     .dark {
@@ -90,6 +93,7 @@
 html,
 body,
 #root {
+    background-color: var(--tvam-bg-1);
     width: 100%;
     height: 100%;
     box-sizing: border-box;
