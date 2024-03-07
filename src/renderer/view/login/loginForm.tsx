@@ -98,7 +98,7 @@ export default function LoginForm() {
                             >
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select an account to login into" />
+                                        <SelectValue placeholder="Select a profile to login into" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
