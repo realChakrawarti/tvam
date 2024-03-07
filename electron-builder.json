@@ -32,12 +32,12 @@
     },
     "win": {
         "target": ["nsis"]
-      },
-      "nsis": {
+    },
+    "nsis": {
         "oneClick": false,
-        "artifactName": "tvam-${version}.${ext}",
+        "artifactName": "tvam-setup-${version}-${os}${arch}.${ext}",
         "allowToChangeInstallationDirectory": true
-      },
+    },
     "linux": {
         "target": ["AppImage"],
         "category": "Development"

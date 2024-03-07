@@ -94,6 +94,7 @@ export default function SignupForm() {
                                 This is your passcode which will be used to
                                 login
                             </FormDescription>
+                            <FormMessage />
                         </FormItem>
                     )}
                 />

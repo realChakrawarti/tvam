@@ -1,11 +1,13 @@
 import path from 'path';
+import type { Tray } from 'electron';
 import { app, BrowserWindow } from 'electron';
 import sourceMapSupport from 'source-map-support';
-import { resolveHtmlPath, verifyDb } from './util';
+import { createTray, getAssetPath, resolveHtmlPath, verifyDb } from './util';
 import registerServices from './service';
 import { DatabaseHelper } from './model/databaseHelper';
 
 let mainWindow: BrowserWindow | null = null;
+let tray: Tray | null = null;
 
 const sqliteDbPath =
     process.env.NODE_ENV !== 'production'
@@ -22,14 +24,6 @@ const isDebug =
     process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
 const createWindow = async () => {
-    const RESOURCES_PATH = app.isPackaged
-        ? path.join(process.resourcesPath, 'assets')
-        : path.join(__dirname, '../../assets');
-
-    const getAssetPath = (...paths: string[]): string => {
-        return path.join(RESOURCES_PATH, ...paths);
-    };
-
     mainWindow = new BrowserWindow({
         show: false,
         width: 1024,
@@ -56,6 +50,11 @@ const createWindow = async () => {
         if (app.isPackaged) {
             mainWindow.removeMenu();
         }
+
+        if (tray) {
+            tray.destroy();
+        }
+        tray = createTray(mainWindow);
 
         if (process.env.START_MINIMIZED) {
             mainWindow.minimize();
