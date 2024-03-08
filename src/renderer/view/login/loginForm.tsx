@@ -28,6 +28,7 @@ import type { LoginFormSchema } from '@/renderer/types/schema';
 import { loginFormSchema } from '@/renderer/types/schema';
 import useUserStore from '@/renderer/store/user';
 import { useSetLocalStorageUsers } from '@/renderer/utils/hooks';
+import { useToast } from '@/components/ui/use-toast';
 
 function loggedInExpired(unixEpoch: number, expiryAfterMinutes: number) {
     // Get the current timestamp in milliseconds
@@ -40,6 +41,7 @@ function loggedInExpired(unixEpoch: number, expiryAfterMinutes: number) {
 
 export default function LoginForm() {
     useSetLocalStorageUsers();
+    const { toast } = useToast();
 
     const allUsers = useUserStore((state) => state.users);
 
@@ -73,6 +75,9 @@ export default function LoginForm() {
                     iat: Date.now(),
                 })
             );
+            toast({
+                title: response.message,
+            });
             navigate(ROUTE.DASHBOARD);
         }
     }
