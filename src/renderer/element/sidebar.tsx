@@ -28,7 +28,7 @@ export default function Sidebar({
 
     const handleAccountSwitch = () => {
         window.localStorage.removeItem('loggedIn');
-        navigate(ROUTE.LOGIN);
+        navigate(ROUTE.AUTHENTICATE + '/' + ROUTE.LOGIN);
         toast({
             title: 'Logged out sucessfully!',
         });
