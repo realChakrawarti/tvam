@@ -1,6 +1,6 @@
-import LoginPage from './login';
-import SignupPage from './signup';
 import SplashPage from './splash';
 import DashboardPage from './dashboard';
+import AuthenticatePage from './authenticate';
+import ErrorPage from './error';
 
-export { SignupPage, LoginPage, SplashPage, DashboardPage };
+export { AuthenticatePage, SplashPage, DashboardPage, ErrorPage };

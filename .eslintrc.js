@@ -1,7 +1,8 @@
 module.exports = {
     extends: 'erb',
-    plugins: ['@typescript-eslint'],
+    plugins: ['plugin:prettier/recommended', '@typescript-eslint'],
     rules: {
+        'prettier/prettier': 'on',
         // A temporary hack related to IDE not resolving correct package.json
         'import/no-extraneous-dependencies': 'off',
         '@typescript-eslint/consistent-type-imports': 'error',

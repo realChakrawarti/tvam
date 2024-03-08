@@ -5,7 +5,6 @@ import { useContext, createContext } from 'react';
 import logo from 'assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE } from '../types';
-import { useToast } from '@/components/ui/use-toast';
 
 const SidebarContext = createContext({ expanded: false });
 
@@ -24,14 +23,10 @@ export default function Sidebar({
     setExpanded,
 }: SidebarProps) {
     const navigate = useNavigate();
-    const { toast } = useToast();
 
     const handleAccountSwitch = () => {
         window.localStorage.removeItem('loggedIn');
         navigate(ROUTE.LOGIN);
-        toast({
-            title: 'Logged out sucessfully!',
-        });
     };
 
     return (
@@ -40,7 +35,7 @@ export default function Sidebar({
                 <div className="p-4 pb-2 flex justify-between items-center">
                     <img
                         src={logo}
-                        className={`overflow-hidden ${
+                        className={`overflow-hidden transition-all ${
                             expanded ? 'size-8' : 'w-0'
                         }`}
                         alt=""
@@ -75,7 +70,7 @@ export default function Sidebar({
                     <div
                         className={`
               flex justify-between items-center
-              overflow-hidden transition-[width] ${
+              overflow-hidden transition-all ${
                   expanded ? 'w-52 ml-3' : 'w-0 h-0'
               }
           `}
@@ -84,9 +79,9 @@ export default function Sidebar({
                             <h4 className="font-semibold whitespace-nowrap">
                                 {name}
                             </h4>
-                            <span className="text-xs text-gray-600">
+                            <div className="text-xs text-gray-600">
                                 {exp} EXP
-                            </span>
+                            </div>
                         </div>
                         <MoreVertical size={20} />
                     </div>
@@ -114,20 +109,21 @@ export function SidebarItem({ icon: Icon, label, path }: SidebarItemProps) {
     };
 
     return (
-        <button className="block" type="button" onClick={navigateSidebar}>
+        <button
+            className="block relative"
+            type="button"
+            onClick={navigateSidebar}
+        >
             <li
-                className={`
-        relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer text-[var(--tvam-bg-2)] hover:text-[var(--tvam-bg-1)]
-        transition-colors group
-        ${
-            active
-                ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-[var(--tvam-bg-1)]'
-                : 'hover:bg-indigo-50 text-[var(--tvam-bg-2)]'
-        }
+                className={`flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer
+            ${
+                active
+                    ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-gray-600'
+                    : 'hover:bg-indigo-50 text-[#99aac4]'
+            }
     `}
             >
-                <Icon size={20} />
+                <Icon className="text-[#99aac4]" size={20} />
                 <span
                     className={`overflow-hidden transition-all text-left ${
                         expanded ? 'w-52 ml-3' : 'w-0'
@@ -147,7 +143,7 @@ export function SidebarItem({ icon: Icon, label, path }: SidebarItemProps) {
                     <div
                         className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-indigo-100 text-[var(--tvam-bg-1)] text-sm
+          bg-indigo-100 text-indigo-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 none
       `}

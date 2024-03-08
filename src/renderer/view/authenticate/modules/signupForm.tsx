@@ -21,6 +21,7 @@ import { ROUTE } from '@/renderer/types';
 import type { SignupFormSchema } from '@/renderer/types/schema';
 import { signupFormSchema } from '@/renderer/types/schema';
 import useUserStore from '@/renderer/store/user';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function SignupForm() {
     const allUsers = useUserStore((state) => state.users);
@@ -36,10 +37,14 @@ export default function SignupForm() {
     });
 
     const navigate = useNavigate();
+    const { toast } = useToast();
 
     const onSubmit = async (data: SignupFormSchema) => {
         const signupResponse = await DbApi.invoke(Channel.CREATE_USER, data);
         if (signupResponse.status === HttpStatusCode.CREATED) {
+            toast({
+                title: signupResponse.message,
+            });
             if (data.loginAfterSignup) {
                 const loginResponse = await DbApi.invoke(Channel.LOGIN_USER, {
                     userId: signupResponse.data.userId,
@@ -140,7 +145,7 @@ export default function SignupForm() {
                         Already have a profile? Click{' '}
                         <Link
                             className="font-semibold text-indigo-500 hover:text-indigo-800 hover:underline"
-                            to={ROUTE.LOGIN}
+                            to={ROUTE.AUTHENTICATE + '/' + ROUTE.LOGIN}
                         >
                             here
                         </Link>{' '}

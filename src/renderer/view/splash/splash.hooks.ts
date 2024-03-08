@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface PageTimeoutProps {
-    path: RoutePath;
+    path: string;
     timeoutInSeconds: number;
     callback?: () => void | undefined;
 }
