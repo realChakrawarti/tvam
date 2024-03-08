@@ -2,34 +2,28 @@ import Sidebar, { SidebarItem } from '@/renderer/element/sidebar';
 import { useState } from 'react';
 import { ActivitySquare, LayoutGrid } from 'lucide-react';
 import { useGetLocalStorage } from '@/renderer/utils/hooks';
+import { Outlet } from 'react-router-dom';
+import { ROUTE } from '@/renderer/types';
 
 const sidebarMenuItems = [
     {
         icon: ActivitySquare,
-        label: 'Dashboard',
-        key: 'dashbaord',
-        action: (cb: any) => cb(),
+        label: 'Activity',
+        navigatePath: ROUTE.ACTIVITY,
     },
     {
         icon: LayoutGrid,
         label: 'Apps',
-        key: 'apps',
-        action: (cb: any) => cb(),
+        navigatePath: ROUTE.APPS,
     },
 ];
 
 export default function DashboardPage() {
     const [expanded, setExpanded] = useState(true);
-    const [activeTab, setActiveTab] = useState<string>('');
 
     const user: { name: string; userId: string; iat: string } =
         useGetLocalStorage('loggedIn');
 
-    const handleMenuItemClick = (tab: string, action: any) => {
-        action(() => {
-            setActiveTab(tab);
-        });
-    };
     return (
         <div className="w-screen h-svh flex text-[var(--tvam-bg-2)]">
             <div
@@ -42,19 +36,15 @@ export default function DashboardPage() {
                 >
                     {sidebarMenuItems.map((item) => (
                         <SidebarItem
-                            onClick={handleMenuItemClick}
-                            key={item.key}
+                            key={item.navigatePath}
                             icon={item.icon}
-                            alert={item.label}
-                            text={item.label}
-                            tab={item.key}
-                            action={item.action}
-                            active={item.key === activeTab}
+                            label={item.label}
+                            path={item.navigatePath}
                         />
                     ))}
                 </Sidebar>
             </div>
-            <div className="flex-grow">Main Content</div>
+            <Outlet />
         </div>
     );
 }

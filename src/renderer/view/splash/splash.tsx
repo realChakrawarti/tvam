@@ -22,7 +22,9 @@ export default function SplashPage() {
     });
 
     const users = useGetLocalStorage('allUsers');
-    const path = users?.length ? ROUTE.LOGIN : ROUTE.SIGNUP;
+    const path = users?.length
+        ? ROUTE.AUTHENTICATE + '/' + ROUTE.LOGIN
+        : ROUTE.AUTHENTICATE + '/' + ROUTE.SIGNUP;
 
     usePageTimeout({
         path,

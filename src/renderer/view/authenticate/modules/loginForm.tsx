@@ -79,6 +79,14 @@ export default function LoginForm() {
                 title: response.message,
             });
             navigate(ROUTE.DASHBOARD);
+        } else if (response.status === HttpStatusCode.NOT_FOUND) {
+            toast({
+                title: response.message,
+            });
+        } else {
+            toast({
+                title: 'Something went wrong!',
+            });
         }
     }
 
@@ -141,7 +149,7 @@ export default function LoginForm() {
                     Click{' '}
                     <Link
                         className="font-semibold text-indigo-500 hover:text-indigo-800 hover:underline"
-                        to={ROUTE.SIGNUP}
+                        to={ROUTE.AUTHENTICATE + '/' + ROUTE.SIGNUP}
                     >
                         here
                     </Link>{' '}
