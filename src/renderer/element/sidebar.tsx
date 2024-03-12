@@ -6,6 +6,7 @@ import logo from 'assets/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE } from '../types';
 import { useToast } from '@/components/ui/use-toast';
+import { cn } from '@/lib/utils';
 
 const SidebarContext = createContext({ expanded: false });
 
@@ -37,7 +38,7 @@ export default function Sidebar({
     return (
         <aside className="h-screen">
             <nav className="h-full flex flex-col border-r shadow-sm">
-                <div className="p-4 pb-2 flex justify-between items-center">
+                <div className="pt-8 px-4 pb-2 flex justify-between items-center">
                     <img
                         src={logo}
                         className={`overflow-hidden ${
@@ -116,16 +117,16 @@ export function SidebarItem({ icon: Icon, label, path }: SidebarItemProps) {
     return (
         <button className="block" type="button" onClick={navigateSidebar}>
             <li
-                className={`
+                className={cn(`
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer text-[var(--tvam-bg-2)] hover:text-[var(--tvam-bg-1)]
         transition-colors group
         ${
             active
                 ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100 text-[var(--tvam-bg-1)]'
-                : 'hover:bg-indigo-50 text-[var(--tvam-bg-2)]'
+                : 'hover:bg-indigo-50'
         }
-    `}
+    `)}
             >
                 <Icon size={20} />
                 <span

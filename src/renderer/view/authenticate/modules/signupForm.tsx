@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Channel } from '@/common/channel';
 import { useForm } from 'react-hook-form';
-import DbApi from '@/renderer/utils/api';
+import DbApi from '@/renderer/view/utils/api';
 import { PasswordInput } from '@/components/ui/password-input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import HttpStatusCode from '@/common/httpStatusCode';

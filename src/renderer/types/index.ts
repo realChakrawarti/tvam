@@ -7,6 +7,8 @@ export const ROUTE = {
     ACTIVITY: 'activity',
     APPS: 'apps',
     AUTHENTICATE: '/auth',
+    FEAR_SETTING: '/feature/fear-setting',
+    FEATURE: '/feature',
 } as const;
 
 export type RoutePath = (typeof ROUTE)[keyof typeof ROUTE];

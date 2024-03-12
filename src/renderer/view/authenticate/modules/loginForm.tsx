@@ -20,14 +20,14 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { useEffect } from 'react';
-import DbApi from '@/renderer/utils/api';
+import DbApi from '@/renderer/view/utils/api';
 import { Channel } from '@/common/channel';
 import HttpStatusCode from '@/common/httpStatusCode';
 import { PasswordInput } from '@/components/ui/password-input';
 import type { LoginFormSchema } from '@/renderer/types/schema';
 import { loginFormSchema } from '@/renderer/types/schema';
 import useUserStore from '@/renderer/store/user';
-import { useSetLocalStorageUsers } from '@/renderer/utils/hooks';
+import { useSetLocalStorageUsers } from '@/renderer/view/utils/hooks';
 import { useToast } from '@/components/ui/use-toast';
 
 function loggedInExpired(unixEpoch: number, expiryAfterMinutes: number) {

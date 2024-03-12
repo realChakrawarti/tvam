@@ -1,7 +1,7 @@
 import Sidebar, { SidebarItem } from '@/renderer/element/sidebar';
 import { useState } from 'react';
 import { ActivitySquare, LayoutGrid } from 'lucide-react';
-import { useGetLocalStorage } from '@/renderer/utils/hooks';
+import { useGetLocalStorage } from '@/renderer/view/utils/hooks';
 import { Outlet } from 'react-router-dom';
 import { ROUTE } from '@/renderer/types';
 
@@ -25,9 +25,9 @@ export default function DashboardPage() {
         useGetLocalStorage('loggedIn');
 
     return (
-        <div className="w-screen h-svh flex text-[var(--tvam-bg-2)]">
+        <div className="overflow-y-hidden w-screen h-svh flex text-[var(--tvam-bg-2)]">
             <div
-                className={`transition-all ${expanded} ? 'w-[270px]' : 'w-[52px]'`}
+                className={`sticky transition-all ${expanded} ? 'w-[270px]' : 'w-[52px]'`}
             >
                 <Sidebar
                     name={user.name}

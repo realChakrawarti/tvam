@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import {
     useGetLocalStorage,
     useSetLocalStorageUsers,
-} from '@/renderer/utils/hooks';
+} from '@/renderer/view/utils/hooks';
 import usePageTimeout from './splash.hooks';
 
 const tasks = [
