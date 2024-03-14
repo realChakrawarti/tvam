@@ -133,7 +133,7 @@ export async function loginUser(_: IpcMainInvokeEvent, data: any) {
                         },
                     });
                 }
-                reject(new Error("User doesn't exists!"));
+                reject(new Error("Passcode doesn't match!"));
             });
         });
     };

@@ -106,7 +106,10 @@ export default function LoginForm() {
                         <FormItem>
                             <FormLabel>Profile</FormLabel>
                             <Select
-                                onValueChange={field.onChange}
+                                onValueChange={(e) => {
+                                    field.onChange(e);
+                                    form.resetField('passcode');
+                                }}
                                 defaultValue={field.value}
                             >
                                 <FormControl>

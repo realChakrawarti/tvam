@@ -16,9 +16,17 @@ export type LoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const signupFormSchema = z
     .object({
-        name: z.string().min(3, {
-            message: 'Name must be atleast 3 characters',
-        }),
+        name: z
+            .string()
+            .min(3, {
+                message: 'Name must be atleast 3 characters',
+            })
+            .max(32, {
+                message: 'Name is too long, at-most 32 characters',
+            })
+            .refine((value) => isNaN(Number(value)), {
+                message: 'Name cannot be all numeric',
+            }),
         passcode: z
             .string()
             .min(4, {

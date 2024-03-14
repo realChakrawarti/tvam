@@ -23,6 +23,17 @@ import { signupFormSchema } from '@/renderer/types/schema';
 import useUserStore from '@/renderer/store/user';
 import { useToast } from '@/components/ui/use-toast';
 
+function capitalizeName(name: string) {
+    const words = name.split(' ');
+
+    // Capitalize the first letter of each word
+    const capitalizedWords = words.map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+
+    return capitalizedWords.join(' ');
+}
+
 export default function SignupForm() {
     const allUsers = useUserStore((state) => state.users);
 
@@ -40,7 +51,8 @@ export default function SignupForm() {
     const { toast } = useToast();
 
     const onSubmit = async (data: SignupFormSchema) => {
-        const signupResponse = await DbApi.invoke(Channel.CREATE_USER, data);
+        const payload = { ...data, name: capitalizeName(data.name) };
+        const signupResponse = await DbApi.invoke(Channel.CREATE_USER, payload);
         if (signupResponse.status === HttpStatusCode.CREATED) {
             toast({
                 title: signupResponse.message,
@@ -62,8 +74,12 @@ export default function SignupForm() {
                     navigate(ROUTE.DASHBOARD);
                 }
             } else {
-                navigate(ROUTE.LOGIN);
+                navigate(ROUTE.AUTHENTICATE + '/' + ROUTE.LOGIN);
             }
+        } else {
+            toast({
+                title: signupResponse.message,
+            });
         }
     };
 
